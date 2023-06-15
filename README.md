@@ -16,3 +16,75 @@ The universe of the Game of Life is an infinite, two-dimensional orthogonal grid
 - Any live cell with two or three live neighbours lives on to the next generation.
 - Any live cell with more than three live neighbours dies, as if by overpopulation.
 - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+
+# About the project
+
+## How to run the project
+
+Please run this command
+
+```
+npm run start
+```
+
+# Solution
+
+## Folder Structure
+
+- type: includes all type definition
+
+Type definition for conway game cell state: dead or live
+
+```typescript
+enum CellState {
+  DEAD,
+  LIVE,
+}
+```
+
+Type definition for conway game cell position: x and y
+
+```typescript
+interface CellPosition {
+  x: number;
+  y: number;
+}
+```
+
+Type definition for conway game cells board
+
+```typescript
+type CellsHash = Record<string, Record<string, number>>;
+```
+
+- utils: include the utility classes
+
+Conway Game class that will be used to generate next conway world
+
+```typescript
+class ConwayGame {
+  // build the internal state with live cell positions
+  constructor(liveCells: CellPosition[]): void;
+
+  // generate next conway world and update internal stsate
+  public moveToNextGeneration(): void;
+
+  // get the live cell positions fron internal state
+  public getLiveCells(): CellPosition[];
+}
+```
+
+Conway Game Cells Board class that will be used to store the game world state
+
+```typescript
+class CellsBoard {
+  // game cell hash map
+  public hash: CellsHash;
+
+  // set the state of the cell
+  public setState(cell: CellPosition, state: CellState): void;
+
+  // get the state of the cell
+  public getState(cell: CellPosition): CellState;
+}
+```
